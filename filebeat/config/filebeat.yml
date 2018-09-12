@@ -1,0 +1,22 @@
+filebeat.inputs:
+- type: log
+
+  paths:
+    - /logs_here/*.log
+  encoding: utf-8
+  fields_under_root: false
+  document_type: log
+  scan_frequency: 10s
+  close_inactive: 30s
+  harvester_buffer_size: 16384
+  max_bytes: 10485760
+
+  multiline:
+    pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}'
+    negate: true
+    match: after
+    max_lines: 20000
+  tail_files: false
+
+output.logstash:
+  hosts: ["logstash:5044"]

@@ -1,0 +1,2 @@
+DELIM \s-\s
+DEMO_PATTERN %{DATA:log_timestamp}%{DELIM}%{DATA:loglevel}%{DELIM}%{DATA:component}%{DELIM}%{DATA:operation}%{DELIM}%{DATA:correlation_id}%{DELIM}%{DATA:thread_id}%{DELIM}%{DATA:user}%{DELIM}%{DATA:transaction_id}%{DELIM}%{DATA:class}%{DELIM}%{GREEDYDATA:payload}
