@@ -3,6 +3,7 @@ version: '3'
 services:
 
   elasticsearch:
+    container_name: melk-elasticsearch
     image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.5.0
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
@@ -14,6 +15,7 @@ services:
       - elk
 
   logstash:
+    container_name: melk-logstash
     image: docker.elastic.co/logstash/logstash:6.5.0
     volumes:
       - ./logstash/config/:/usr/share/logstash/config/:ro
@@ -30,6 +32,7 @@ services:
       - elasticsearch
 
   kibana:
+    container_name: melk-kibana
     image: docker.elastic.co/kibana/kibana-oss:6.5.0
     volumes:
       - ./kibana/config/:/usr/share/kibana/config:ro
@@ -41,6 +44,7 @@ services:
       - elasticsearch
 
   filebeat:
+    container_name: melk-filebeat
     image: docker.elastic.co/beats/filebeat:6.5.0
     volumes:
       - ./filebeat/config/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
@@ -51,6 +55,7 @@ services:
       - logstash
 
   curator:
+    container_name: melk-curator
     image: markhendriks/curator
     volumes:
       - ./curator/config:/config
