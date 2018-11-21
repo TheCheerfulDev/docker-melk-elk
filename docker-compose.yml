@@ -50,6 +50,15 @@ services:
     depends_on:
       - logstash
 
+  curator:
+    image: markhendriks/curator
+    volumes:
+      - ./curator/config:/config
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+
 networks:
 
   elk:
