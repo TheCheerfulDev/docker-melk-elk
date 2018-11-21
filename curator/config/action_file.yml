@@ -2,7 +2,7 @@ actions:
   1:
     action: delete_indices
     description: >-
-       Delete indices older than ${UNIT_COUNT:1} ${UNIT:months} (based on index name), for logstash-
+       Delete indices older than ${UNIT_COUNT:1} ${UNIT:days} (based on index name), for logstash-
        prefixed indices. Ignore the error if the filter does not result in an
        actionable list of indices (ignore_empty_list) and exit cleanly.
     options:
@@ -13,7 +13,7 @@ actions:
     filters:
     - filtertype: pattern
       kind: regex
-      value: '^.+-'
+      value: logstash-
     - filtertype: age
       source: name
       direction: older
