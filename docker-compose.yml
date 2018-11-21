@@ -3,52 +3,52 @@ version: '3'
 services:
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.4.0
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.5.0
     volumes:
-      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+    - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
     ports:
-      - "9200:9200"
+    - "9200:9200"
     environment:
       ES_JAVA_OPTS: "-Xmx1024m -Xms1024m -Duser.timezone=CET"
     networks:
-      - elk
+    - elk
 
   logstash:
-    image: docker.elastic.co/logstash/logstash:6.4.0
+    image: docker.elastic.co/logstash/logstash:6.5.0
     volumes:
-      - ./logstash/config/:/usr/share/logstash/config/:ro
-      - ./logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
-      - ./logstash/patterns/:/patterns/:ro
+    - ./logstash/config/:/usr/share/logstash/config/:ro
+    - ./logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
+    - ./logstash/patterns/:/patterns/:ro
     ports:
-      - "5044:5044"
+    - "5044:5044"
     environment:
       LS_JAVA_OPTS: "-Xmx1024m -Xms1024m -Duser.timezone=CET"
     command: --config.reload.automatic
     networks:
-      - elk
+    - elk
     depends_on:
-      - elasticsearch
+    - elasticsearch
 
   kibana:
-    image: docker.elastic.co/kibana/kibana-oss:6.4.0
+    image: docker.elastic.co/kibana/kibana-oss:6.5.0
     volumes:
-      - ./kibana/config/:/usr/share/kibana/config:ro
+    - ./kibana/config/:/usr/share/kibana/config:ro
     ports:
-      - "5601:5601"
+    - "5601:5601"
     networks:
-      - elk
+    - elk
     depends_on:
-      - elasticsearch
+    - elasticsearch
 
   filebeat:
-    image: docker.elastic.co/beats/filebeat:6.4.0
+    image: docker.elastic.co/beats/filebeat:6.5.0
     volumes:
-      - ./filebeat/config/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
-      - ./filebeat/logs_here/:/logs_here
+    - ./filebeat/config/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+    - ./filebeat/logs_here/:/logs_here
     networks:
-      - elk
+    - elk
     depends_on:
-      - logstash
+    - logstash
 
 networks:
 
