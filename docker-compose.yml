@@ -3,7 +3,7 @@ version: '3'
 services:
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.4.0
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.5.0
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
     ports:
@@ -14,7 +14,7 @@ services:
       - elk
 
   logstash:
-    image: docker.elastic.co/logstash/logstash:6.4.0
+    image: docker.elastic.co/logstash/logstash:6.5.0
     volumes:
       - ./logstash/config/:/usr/share/logstash/config/:ro
       - ./logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
@@ -30,7 +30,7 @@ services:
       - elasticsearch
 
   kibana:
-    image: docker.elastic.co/kibana/kibana-oss:6.4.0
+    image: docker.elastic.co/kibana/kibana-oss:6.5.0
     volumes:
       - ./kibana/config/:/usr/share/kibana/config:ro
     ports:
@@ -41,7 +41,7 @@ services:
       - elasticsearch
 
   filebeat:
-    image: docker.elastic.co/beats/filebeat:6.4.0
+    image: docker.elastic.co/beats/filebeat:6.5.0
     volumes:
       - ./filebeat/config/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
       - ./filebeat/logs_here/:/logs_here
