@@ -19,7 +19,7 @@ services:
     image: docker.elastic.co/logstash/logstash:6.5.0
     volumes:
       - ./logstash/config/:/usr/share/logstash/config/:ro
-      - ./logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
+      - ./logstash/pipeline/:/usr/share/logstash/pipeline/:ro
       - ./logstash/patterns/:/patterns/:ro
     ports:
       - "5044:5044"
@@ -54,15 +54,15 @@ services:
     depends_on:
       - logstash
 
-  curator:
-    container_name: melk-curator
-    image: markhendriks/curator
-    volumes:
-      - ./curator/config:/config
-    networks:
-      - elk
-    depends_on:
-      - elasticsearch
+#  curator:
+#    container_name: melk-curator
+#    image: markhendriks/curator
+#    volumes:
+#      - ./curator/config:/config
+#    networks:
+#      - elk
+#    depends_on:
+#      - elasticsearch
 
 networks:
 

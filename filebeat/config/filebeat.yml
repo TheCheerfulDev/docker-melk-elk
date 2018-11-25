@@ -19,4 +19,4 @@ filebeat.inputs:
   tail_files: false
 
 output.logstash:
-  hosts: ["logstash:5044"]
+  hosts: ["logstash:5045"]
